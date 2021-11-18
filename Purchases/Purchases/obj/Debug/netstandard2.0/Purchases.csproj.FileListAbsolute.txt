@@ -1,0 +1,17 @@
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\Purchases.deps.json
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\Purchases.dll
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\ref\Purchases.dll
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\Purchases.pdb
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.csproj.AssemblyReference.cache
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.AssemblyInfoInputs.cache
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.AssemblyInfo.cs
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.csproj.CoreCompileInputs.cache
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.dll
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\ref\Purchases.dll
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.pdb
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\MainPage.xaml.g.cs
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\ProductsPage.xaml.g.cs
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\AddProductPage.xaml.g.cs
+C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\EditProductsPage.xaml.g.cs

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Purchases.Views.MainPage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Adicionar Lista" Command="{Binding AddPurchaseCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions/>
+            <Grid.ColumnDefinitions/>
+
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                <Label Text="Não existe listas de compras, clique em adicionar!" VerticalOptions="Center" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding ExistPurchases}" BackgroundColor="White" x:Name="StackRoot" Padding="5">
+                <CollectionView ItemsSource="{Binding Purchases}" SelectionMode="Single" SelectedItem="{Binding PurchaseSelected}" SelectionChangedCommand="{Binding SelectPurchaseCommand}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="5" BackgroundColor="#2196F3" CornerRadius="15">
+                                <StackLayout Orientation="Horizontal" Padding="10,0">
+                                    <Label FontSize="Medium" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Name}" TextTransform="Uppercase"/>
+                                                <Span Text=" - "/>
+                                                <Span Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <ImageButton BackgroundColor="Transparent" Padding="10" HeightRequest="50" WidthRequest="50" Command="{Binding BindingContext.DeletePurchaseCommand, Source={x:Reference StackRoot}}" CommandParameter="{Binding Id}">
+                                        <ImageButton.Source>
+                                            <FontImageSource FontFamily="FontAwesome" Glyph="&#xf2ed;" Color="White"/>
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <ActivityIndicator VerticalOptions="EndAndExpand" Margin="40" HorizontalOptions="Center" IsRunning="true" IsVisible="{Binding SimpleTaskVisible}" Color="Black"/>
+
+            <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="White" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="Center" IsRunning="True" Color="Black"/>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

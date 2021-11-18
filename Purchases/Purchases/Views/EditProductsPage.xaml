@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Purchases.Views.EditProductsPage" Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Padding="5">
+                <Grid.RowDefinitions/>
+                <Grid.ColumnDefinitions/>
+
+                <StackLayout BackgroundColor="White" x:Name="StackRoot">
+                    <CollectionView ItemsSource="{Binding Products}" SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="5" BackgroundColor="#2196F3" CornerRadius="15">
+                                    <StackLayout Orientation="Horizontal" Padding="10,5">
+                                        <CheckBox IsChecked="{Binding ProductPurchased}" Color="White" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                        <Label FontSize="Medium" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" TextTransform="Uppercase" HorizontalOptions="StartAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Name}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <ImageButton BackgroundColor="Transparent" Padding="8" Command="{Binding BindingContext.DeleteProductCommand, Source={x:Reference StackRoot}}" CommandParameter="{Binding Id}">
+                                            <ImageButton.Source>
+                                                <FontImageSource FontFamily="FontAwesome" Glyph="&#xf2ed;" Color="White"/>
+                                            </ImageButton.Source>
+                                        </ImageButton>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <ActivityIndicator Color="Black" HorizontalOptions="Center" IsRunning="{Binding LoadSimpleTask}"/>
+                </StackLayout>
+
+                <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="White" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">
+                    <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="Center" IsRunning="True" Color="Black"/>
+                </StackLayout>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

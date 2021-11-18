@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Purchases.Views.ProductsPage"
+             Title="{Binding Title}"
+             BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Adicionar" Command="{Binding AddProductCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions/>
+            <Grid.ColumnDefinitions/>
+
+            <StackLayout>
+                <Label Text="Não existe produtos, clique em adicionar!" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding ExistProducts}" BackgroundColor="White" x:Name="StackRoot" Padding="5">
+                <Entry Text="{Binding Name}" TextColor="Black" FontSize="Medium" Margin="10,5" Placeholder="Nome da lista"/>
+                <CollectionView ItemsSource="{Binding Products}" SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="5" BackgroundColor="#2196F3" CornerRadius="15">
+                                <StackLayout Orientation="Horizontal" Padding="5">
+                                    <CheckBox IsChecked="{Binding Selected}" Color="White" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                    <Label FontSize="Medium" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Name}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <ImageButton BackgroundColor="Transparent" Padding="8" Command="{Binding BindingContext.EditProductCommand, Source={x:Reference StackRoot}}" CommandParameter="{Binding Id}">
+                                        <ImageButton.Source>
+                                            <FontImageSource FontFamily="FontAwesome" Glyph="&#xf044;" Color="White"/>
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                    <ImageButton BackgroundColor="Transparent" Padding="8" Command="{Binding BindingContext.DeleteProductCommand, Source={x:Reference StackRoot}}" CommandParameter="{Binding Id}">
+                                        <ImageButton.Source>
+                                            <FontImageSource FontFamily="FontAwesome" Glyph="&#xf2ed;" Color="White"/>
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator Color="Black" HorizontalOptions="Center" IsRunning="{Binding LoadSimpleTask}"/>
+                <Button BackgroundColor="#2196F3" Text="Criar lista" FontAttributes="Bold" Command="{Binding CreateListCommand}" Margin="5" CornerRadius="10"/>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" IsRunning="True" Color="Black"/>
+            </StackLayout>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>
