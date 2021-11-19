@@ -15,10 +15,10 @@ namespace Purchases.Views {
 
         AddProductViewModel addProduct;
         EditProductViewModel editProduct;
-        public AddProductPage (bool Edit, Product product = null) {
+        public AddProductPage (bool edit, Product product = null) {
             InitializeComponent();
 
-            if(Edit) {
+            if(edit) {
                 BindingContext = editProduct = new EditProductViewModel(product);
             } else {
                 BindingContext = addProduct = new AddProductViewModel();

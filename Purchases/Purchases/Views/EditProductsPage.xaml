@@ -22,10 +22,12 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="{Binding Name}"/>
+                                                    <Span Text=" - Qtde: "/>
+                                                    <Span Text="{Binding Amount}"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <ImageButton BackgroundColor="Transparent" Padding="8" Command="{Binding BindingContext.DeleteProductCommand, Source={x:Reference StackRoot}}" CommandParameter="{Binding Id}">
+                                        <ImageButton BackgroundColor="Transparent" Padding="8" Command="{Binding BindingContext.DeleteProductCommand, Source={x:Reference StackRoot}}" CommandParameter="{Binding .}">
                                             <ImageButton.Source>
                                                 <FontImageSource FontFamily="FontAwesome" Glyph="&#xf2ed;" Color="White"/>
                                             </ImageButton.Source>
@@ -35,7 +37,6 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                    <ActivityIndicator Color="Black" HorizontalOptions="Center" IsRunning="{Binding LoadSimpleTask}"/>
                 </StackLayout>
 
                 <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="White" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">

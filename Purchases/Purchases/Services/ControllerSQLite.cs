@@ -45,9 +45,13 @@ namespace Purchases.Services {
         }
 
         #region sqlite product
-        public async Task<bool> AddProductAsync (Product item) {
+        public async Task<bool> AddProductAsync (Product product) {
 
-            connection.Insert(item);
+
+            product.Selected = false;
+            product.Amount = 0;
+            product.Name = product.Name.ToUpper();
+            connection.Insert(product);
             return await Task.FromResult(true);
 
         }
@@ -55,22 +59,24 @@ namespace Purchases.Services {
 
         public async Task<bool> UpdateProductAsync (Product product) {
 
+            product.Selected = false;
+            product.Amount = 0;
+            product.Name = product.Name.ToUpper();
             connection.Update(product);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteProductAsync (int id) {
+        public async Task<bool> DeleteProductAsync (Product product) {
 
-            var oldItem = await this.GetProductAsync(id);
-            connection.Delete(oldItem);
+            connection.Delete(product);
             return await Task.FromResult(true);
 
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync () {
+        public async Task<List<Product>> GetProductsAsync () {
 
-            return await Task.FromResult(connection.Table<Product>());
+            return await Task.FromResult(connection.Table<Product>().ToList());
 
         }
 
@@ -136,7 +142,8 @@ namespace Purchases.Services {
                                 IdProduct = pp.IdProduct,
                                 IdPurchase = pp.IdPurchase,
                                 ProductPurchased = pp.ProductPurchased,
-                                Name = p.Name
+                                Name = p.Name,
+                                Amount = pp.Amount
                             }).ToList();
 
             for(int x = 0; x < purchases.Count;x++) {
@@ -163,6 +170,15 @@ namespace Purchases.Services {
             connection.Update(purchaseProduct);
 
             return await Task.FromResult(true);
+        }
+
+
+        public async Task<bool> DeleteProductPurchase(PurchaseProduct product)
+        {
+            connection.Delete(product);
+
+            return await Task.FromResult(true);
+
         }
 
         #endregion

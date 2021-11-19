@@ -10,21 +10,24 @@ namespace Purchases.ViewModels {
 
         public Command SaveProductCommand { get; set; }
 
-        string name;
-        public string Name {
-            get { return name; }
-            set { SetProperty(ref name,value); }
+        Product product;
+        public Product Product
+        {
+            get { return product; }
+            set { SetProperty(ref product, value); }
         }
 
         public AddProductViewModel () {
             Title = "Adicionar Produto";
             SaveProductCommand = new Command(ClickAddProduct);
+
+            Product = new Product();
         }
 
         public async void ClickAddProduct () {
             try {
 
-                if(string.IsNullOrEmpty(Name)) {
+                if(string.IsNullOrEmpty(Product.Name)) {
 
                     App.Toast("Informe um nome valido!");
 
@@ -33,10 +36,6 @@ namespace Purchases.ViewModels {
                     IsBusy = true;
 
                     await Task.Run(() => {
-
-                        Product product = new Product() {
-                            Name = Name.ToUpper(),
-                        };
 
                         SetItem(product).Wait();
                         

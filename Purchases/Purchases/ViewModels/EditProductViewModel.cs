@@ -10,18 +10,16 @@ namespace Purchases.ViewModels {
 
         public Command SaveProductCommand { get; set; }
 
-        string name;
-        public string Name {
-            get { return name; }
-            set { SetProperty(ref name,value); }
+        Product product;
+        public Product Product {
+            get { return product; }
+            set { SetProperty(ref product, value); }
         }
 
-        Product product;
         public EditProductViewModel (Product produtc) {
             Title = "Editar Produto";
 
             this.product = produtc;
-            Name = product.Name;
 
             SaveProductCommand = new Command(ClickEditProduct);
         }
@@ -29,7 +27,7 @@ namespace Purchases.ViewModels {
         public async void ClickEditProduct () {
             try {
 
-                if(string.IsNullOrEmpty(Name)) {
+                if(string.IsNullOrEmpty(Product.Name)) {
 
                     App.Toast("Informe um nome valido!");
 
@@ -39,8 +37,7 @@ namespace Purchases.ViewModels {
 
                     await Task.Run(() => {
 
-                        product.Name = Name;
-                        EditItem(product).Wait();
+                        EditItem(Product).Wait();
                         
                     });
 

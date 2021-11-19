@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -24,6 +25,20 @@ namespace Purchases.ViewModels {
             set => SetProperty(ref _existProducts, value); 
         }
 
+        bool _createList;
+        public bool CreateList
+        {
+            get => _createList;
+            set => SetProperty(ref _createList, value);
+        }
+
+        bool _viewProduct;
+        public bool ViewProduct
+        {
+            get => _viewProduct;
+            set => SetProperty(ref _viewProduct, value);
+        }
+
         bool _loadSimpleTask;
         public bool LoadSimpleTask { 
             get => _loadSimpleTask; 
@@ -41,24 +56,51 @@ namespace Purchases.ViewModels {
         public Command EditProductCommand { get; set; }
         public Command DeleteProductCommand { get; set; }
 
-        public ProductsViewModel () {
+        public ProductsViewModel (bool createList) {
             Title = "Produtos";
             AddProductCommand = new Command(ClickAddProduct);
             CreateListCommand = new Command(ClickCreateList);
-            EditProductCommand = new Command<int>(ClickEditProduto);
-            DeleteProductCommand = new Command<int>(ClickDeleteProduto);
+            EditProductCommand = new Command<Product>(ClickEditProduto);
+            DeleteProductCommand = new Command<Product>(ClickDeleteProduto);
+
+            CreateList = createList;
+            ViewProduct = !createList;
         }
 
+        bool isLoaded = false;
         public async void Appearing () {
             try {
 
-                IsBusy = true;
+                if (!isLoaded)
+                {
 
-                await Task.Run(() => {
+                    IsBusy = true;
 
-                    GetItens().Wait();
-                
-                });
+                    var products = await Task.Run(() => {
+
+                        return controllerApp.GetProductsAsync();
+
+                    });
+
+                    if (products.Count == 0)
+                    {
+                        ExistProducts = false;
+                    }
+                    else
+                    {
+
+                        for (int x = 0; x < products.Count; x++)
+                        {
+                            products[x].SetAmount += OpenAmountProductPage;
+                        }
+
+                        Products = new ObservableCollection<Product>(products);
+                        ExistProducts = true;
+                    }
+
+                    isLoaded = true;
+                }
+
 
             } catch(Exception ex) {
                 App.Toast("Ouve um erro: " + ex.Message);
@@ -124,19 +166,15 @@ namespace Purchases.ViewModels {
                 IsBusy = false;
             }
         }
-        public async void ClickEditProduto(int idProduct) {
+        public async void ClickEditProduto(Product product) {
             try {
 
                 LoadSimpleTask = true;
 
-                var result = await Task.Run(() => {
+                var indexProductOfList = Products.IndexOf(product);
 
-                    var product = controllerApp.GetProductAsync(idProduct);
-                    return product;
-                
-                });
-
-                await App.Current.MainPage.Navigation.PushModalAsync(new AddProductPage(true, result));
+                await App.Current.MainPage.Navigation.PushModalAsync(new AddProductPage(true, Products[indexProductOfList]));
+                isLoaded = false;
 
             } catch(Exception ex) {
                 App.Toast("Ouve um erro: " + ex.Message);
@@ -144,14 +182,15 @@ namespace Purchases.ViewModels {
                 LoadSimpleTask = false;
             }
         }
-        public async void ClickDeleteProduto(int idProduct) {
+        public async void ClickDeleteProduto(Product product) {
             try {
 
                 LoadSimpleTask = true;
 
                 await Task.Run(() => {
 
-                    var product = controllerApp.DeleteProductAsync(idProduct);
+                    var sucess = controllerApp.DeleteProductAsync(product);
+                    isLoaded = false;
                     this.Appearing();
                 
                 });
@@ -180,10 +219,10 @@ namespace Purchases.ViewModels {
 
                 List<PurchaseProduct> listPurchaseProduct = new List<PurchaseProduct>();
 
-                var idProducts = products.Select(p => p.Id);
-                foreach(var idProduct in idProducts) {
+                
+                foreach(var product in products) {
 
-                    listPurchaseProduct.Add(new PurchaseProduct() { IdProduct = idProduct, IdPurchase = idPurchase, ProductPurchased = false});
+                    listPurchaseProduct.Add(new PurchaseProduct() { IdProduct = product.Id, IdPurchase = idPurchase, ProductPurchased = false, Amount = product.Amount});
 
                 }
 
@@ -194,17 +233,12 @@ namespace Purchases.ViewModels {
                 return false;
             }
         }
-        public async Task GetItens () {
+        
+        public void ClickAddProduct () {
             try {
 
-                var products = await controllerApp.GetProductsAsync();
-
-                if(products.Count() == 0) {
-                    ExistProducts = false;
-                } else {
-                    Products = new ObservableCollection<Product>(products);
-                    ExistProducts = true;
-                } 
+                App.Current.MainPage.Navigation.PushModalAsync(new AddProductPage(false));
+                isLoaded = false;
 
             } catch(Exception ex) {
                 App.Toast("Ouve um erro: " + ex.Message);
@@ -212,16 +246,16 @@ namespace Purchases.ViewModels {
                 IsBusy = false;
             }
         }
-        public void ClickAddProduct () {
-            try {
 
-                App.Current.MainPage.Navigation.PushModalAsync(new AddProductPage(false));
 
-            } catch(Exception ex) {
-                App.Toast("Ouve um erro: " + ex.Message);
-            } finally {
-                IsBusy = false;
-            }
+        private AmountProductPage amountProductPage;
+        public void OpenAmountProductPage(object s, EventArgs args)
+        {
+            var product = s as Product;
+
+            amountProductPage = new AmountProductPage(product);
+
+            App.Current.MainPage.Navigation.PushModalAsync(amountProductPage);
         }
 
     }

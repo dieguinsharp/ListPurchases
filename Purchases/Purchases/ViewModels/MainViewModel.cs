@@ -32,12 +32,15 @@ namespace Purchases.ViewModels {
         public Command AddPurchaseCommand { get; set; }
         public Command DeletePurchaseCommand { get; set; }
         public Command SelectPurchaseCommand { get; set; }
+        public Command ViewProductsCommand { get; set; }
+
         public MainViewModel () {
 
             Title = "Pagina Inicial";
             AddPurchaseCommand = new Command(ClickAddPurchase);
             DeletePurchaseCommand = new Command<int>(ClickDeletePurchase);
             SelectPurchaseCommand = new Command(ClickPurchase);
+            ViewProductsCommand = new Command(ClickViewProducts);
 
         }
 
@@ -108,9 +111,24 @@ namespace Purchases.ViewModels {
         public void ClickAddPurchase () {
             try {
 
-                App.Current.MainPage.Navigation.PushAsync(new ProductsPage());
+                App.Current.MainPage.Navigation.PushAsync(new ProductsPage(true));
 
             } catch(Exception ex) {
+                App.Toast("Ouve um erro: " + ex.Message);
+            }
+        }
+
+
+        public void ClickViewProducts()
+        {
+            try
+            {
+
+                App.Current.MainPage.Navigation.PushAsync(new ProductsPage());
+
+            }
+            catch (Exception ex)
+            {
                 App.Toast("Ouve um erro: " + ex.Message);
             }
         }

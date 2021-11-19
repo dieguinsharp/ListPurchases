@@ -1,4 +1,5 @@
-﻿using Purchases.ViewModels;
+﻿using Purchases.Models;
+using Purchases.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,22 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Purchases.Views {
+namespace Purchases.Views
+{
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProductsPage:ContentPage {
+    public partial class ProductsPage : ContentPage
+    {
 
         ProductsViewModel products;
-        public ProductsPage () {
+        public ProductsPage(bool createList = false)
+        {
             InitializeComponent();
 
-            BindingContext = products = new ProductsViewModel();
+            BindingContext = products = new ProductsViewModel(createList);
         }
 
-        protected override void OnAppearing () {
+        protected override void OnAppearing()
+        {
             products.Appearing();
         }
     }

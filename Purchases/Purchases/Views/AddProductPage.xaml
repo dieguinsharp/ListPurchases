@@ -4,7 +4,7 @@
              x:Class="Purchases.Views.AddProductPage" Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout Margin="15" VerticalOptions="Center">
-            <Entry Text="{Binding Name}" Placeholder="Nome do produto" TextColor="Black"/>
+            <Entry Text="{Binding Product.Name}" Placeholder="Nome do produto" TextColor="Black"/>
             <Button Text="Salvar produto" BackgroundColor="#2196F3" FontAttributes="Bold" TextColor="White" CornerRadius="10" Command="{Binding SaveProductCommand}"/>
             <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="Center" IsRunning="{Binding IsBusy}" Color="Black"/>
         </StackLayout>

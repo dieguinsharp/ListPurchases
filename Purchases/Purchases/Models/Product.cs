@@ -14,7 +14,25 @@ namespace Purchases.Models {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool Selected { get; set; }
 
+
+        bool selected;
+        public bool Selected
+        {
+            get
+            {
+                return selected;
+            }
+            set
+            {
+                selected = value;
+                if(value) SetAmount?.Invoke(this, new EventArgs());
+            }
+        }
+
+        public EventHandler SetAmount;
+
+        [Ignore]
+        public int Amount { get; set; }
     }
 }

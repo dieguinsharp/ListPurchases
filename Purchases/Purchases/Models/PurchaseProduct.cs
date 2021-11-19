@@ -14,6 +14,7 @@ namespace Purchases.Models {
         public int Id { get; set; }
         public int IdPurchase { get; set; }
         public int IdProduct { get; set; }
+        public int Amount { get; set; }
 
         bool productPurchasedelected;
         public bool ProductPurchased { 
@@ -33,6 +34,11 @@ namespace Purchases.Models {
         public string Name { get; set; }
 
         public EventHandler ProductSelected;
+
+        public bool Validade()
+        {
+            return Amount > 0;
+        }
 
     }
 }

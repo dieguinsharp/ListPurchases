@@ -15,3 +15,22 @@ C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\n
 C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\ProductsPage.xaml.g.cs
 C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\AddProductPage.xaml.g.cs
 C:\Users\Diego\Desktop\Projeto compras\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\EditProductsPage.xaml.g.cs
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\Purchases.deps.json
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\Purchases.dll
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\ref\Purchases.dll
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\bin\Debug\netstandard2.0\Purchases.pdb
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.csproj.AssemblyReference.cache
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\AddProductPage.xaml.g.cs
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\EditProductsPage.xaml.g.cs
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\MainPage.xaml.g.cs
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\ProductsPage.xaml.g.cs
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.AssemblyInfoInputs.cache
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.AssemblyInfo.cs
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.csproj.CoreCompileInputs.cache
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.dll
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\ref\Purchases.dll
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Purchases.pdb
+C:\Users\poadie09\Desktop\Purchases\Purchases\Purchases\obj\Debug\netstandard2.0\Views\AmountProductPage.xaml.g.cs

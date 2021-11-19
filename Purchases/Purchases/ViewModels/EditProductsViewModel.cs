@@ -41,7 +41,7 @@ namespace Purchases.ViewModels {
             Title = purchase.Name;
 
             idPurchase = purchase.Id;
-            DeleteProductCommand = new Command<int>(ClickDeleteProduto);
+            DeleteProductCommand = new Command<PurchaseProduct>(ClickDeleteProduto);
         }
 
         public async void Appearing () {
@@ -61,14 +61,14 @@ namespace Purchases.ViewModels {
                 IsBusy = false;
             }
         }
-        public async void ClickDeleteProduto(int idProduct) {
+        public async void ClickDeleteProduto(PurchaseProduct product) {
             try {
 
                 LoadSimpleTask = true;
 
                 await Task.Run(() => {
 
-                    var product = controllerApp.DeleteProductAsync(idProduct);
+                    var sucess = controllerApp.DeleteProductPurchase(product);
                     this.Appearing();
                 
                 });
@@ -88,6 +88,7 @@ namespace Purchases.ViewModels {
 
                 if(products == null || products.Count() == 0) {
                     ExistProducts = false;
+                    Products = new ObservableCollection<PurchaseProduct>();
                 } else {
                     Products = new ObservableCollection<PurchaseProduct>(products);
                     ExistProducts = true;
